@@ -1,6 +1,7 @@
 import Modal from "../Layout/Modal";
 import classes from "./Cart.module.css";
-const Cart = () => {
+const Cart = (props) => {
+  console.log(props.onCLose)
   const CartItems =(<ul className={classes["cart-items"]}> {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map(
     (item) =>( 
       <li>{item.name}</li>
@@ -9,7 +10,7 @@ const Cart = () => {
   );
 
   return (
-    <Modal>
+    <Modal onCheck={props.onCLose}>
       <div>{CartItems}</div>
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -17,7 +18,7 @@ const Cart = () => {
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]}>Order</button>
-        <button className={classes.button}>CLose</button>
+        <button className={classes.button} onClick={props.onCLose}>CLose</button>
       </div>
     </Modal>
   );

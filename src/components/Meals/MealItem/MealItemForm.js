@@ -4,7 +4,6 @@ import classes from "./MealItemForm.module.css";
 const MealItemForm = (props) => {
   return (
     <div>
-      {/* {modalChange && <Modal />} */}
       <form className={classes.form}>
       <Input
         label="Amount"
@@ -18,7 +17,7 @@ const MealItemForm = (props) => {
         }}
       />
       <footer>
-        <button className={classes.button} type="button">
+        <button onClick={props.onClick} className={classes.button} type="button">
           + Add
         </button>
       </footer>
