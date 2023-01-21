@@ -3,7 +3,7 @@ import CartContext from '../store/cart-context';
 import classes from './CartItem.module.css';
 
 const CartItem = (props) => {
-  const [quntity,setQuantity] = useState(props.item.quantity);
+  const [quantity,setQuantity] = useState(props.item.quantity);
   const ctx = useContext(CartContext);
   const removeQuantity = () => {
     props.onRemove()
@@ -19,8 +19,8 @@ const CartItem = (props) => {
       <div>
         <h2>{props.item.meal}</h2>
         <div className={classes.summary}>
-          <span className={classes.price}>{(+quntity*+props.item.price).toFixed(2)}</span>
-          <span className={classes.amount}>x{quntity}</span>
+          <span className={classes.price}>{(+quantity*+props.item.price).toFixed(2)}</span>
+          <span className={classes.amount}>x{quantity}</span>
         </div>
       </div>
       <div className={classes.actions}>

@@ -11,7 +11,8 @@ const Cart = (props) => {
   const AddHandler = () => {
     setQuantity((prevSate) => +prevSate + 1);
   };
-  const removeHandler = ()=> {
+  const removeHandler = (item)=> {
+    console.log(item)
     setQuantity((prevSate) => +prevSate - 1);
   }
 
