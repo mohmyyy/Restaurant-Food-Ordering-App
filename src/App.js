@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
+import CartProvide from "./components/store/CartProvider";
 
 function App() {
   const [logModal,setLogModal] = useState(false);
@@ -12,13 +13,13 @@ function App() {
     setLogModal(false)
   }
   return (
-    <Fragment>
+    <CartProvide>
       {logModal && <Cart onCLose={closeModal} />}
       <Header onClick={showModal} />
       <main>
         <Meals />
       </main>
-    </Fragment>
+    </CartProvide>
   );
 }
 

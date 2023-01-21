@@ -1,26 +1,47 @@
+import { useContext, useState } from "react";
 import Modal from "../Layout/Modal";
+import CartContext from "../store/cart-context";
 import classes from "./Cart.module.css";
-const Cart = (props) => {
-  console.log(props.onCLose)
-  const CartItems =(<ul className={classes["cart-items"]}> {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map(
-    (item) =>( 
-      <li>{item.name}</li>
-      ))}
-  </ul>
-  );
+import CartItem from "./CartItem";
 
+const Cart = (props) => {
+  const ctx = useContext(CartContext);
+  const [quantity, setQuantity] = useState(0);
+
+  const AddHandler = () => {
+    setQuantity((prevSate) => +prevSate + 1);
+  };
+  const removeHandler = ()=> {
+    setQuantity((prevSate) => +prevSate - 1);
+  }
+
+  const carts = ctx.items.map((item) => {
+    return <CartItem onRemove = {removeHandler} onAdd={AddHandler} item={item} />;
+  });
+  ctx.items.forEach((item) => {
+    ctx.tottalAount = ctx.tottalAount + +item.price * +item.quantity;
+  });
+  console.log(ctx.items)
   return (
     <Modal onCheck={props.onCLose}>
-      <div>{CartItems}</div>
+      {carts}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>$ 35.62</span>
+        <span>{ctx.tottalAount.toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Order</button>
-        <button className={classes.button} onClick={props.onCLose}>CLose</button>
+        {<button className={classes["button--alt"]}>Order</button>}
+        <button className={classes.button} onClick={props.onCLose}>
+          CLose
+        </button>
       </div>
     </Modal>
   );
 };
 export default Cart;
+
+// <ul className={classes["cart-items"]}>
+//   {ctx.items.map((item) => (
+//     <li>{item.meal}-{item.quantity}-{item.price}</li>
+//   ))}
+// </ul>
